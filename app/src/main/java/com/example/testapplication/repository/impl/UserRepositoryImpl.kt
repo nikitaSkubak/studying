@@ -10,7 +10,6 @@ class UserRepositoryImpl @Inject constructor(
     private val placeHolder: PlaceHolderApi
     ): UserRepository {
 
-    override fun getUsers(): Single<List<PlaceHolderUser>> {
-        placeHolder.
-    }
+    override fun getUsers(): Single<List<PlaceHolderUser>> = placeHolder.getUsers()
+
 }

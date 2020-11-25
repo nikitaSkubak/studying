@@ -5,5 +5,5 @@ import retrofit2.http.GET
 
 interface PlaceHolderApi {
     @GET("users")
-    fun getUsers(): Single<PlaceHolderUser>
+    fun getUsers(): Single<List<PlaceHolderUser>>
 }

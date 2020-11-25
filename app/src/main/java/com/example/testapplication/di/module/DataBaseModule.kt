@@ -1,12 +1,17 @@
 package com.example.testapplication.di.module
 
+import com.example.testapplication.api.PlaceHolderApi
 import com.example.testapplication.repository.UserRepository
 import com.example.testapplication.repository.impl.UserRepositoryImpl
-import dagger.Binds
 import dagger.Module
+import dagger.Provides
+import javax.inject.Singleton
 
 @Module
-interface DataBaseModule {
-    @Binds
-    fun bindUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository
+class DataBaseModule {
+
+    @Singleton
+    @Provides
+    fun bindUserRepository(placeHolderApi: PlaceHolderApi): UserRepository =
+            UserRepositoryImpl(placeHolderApi)
 }

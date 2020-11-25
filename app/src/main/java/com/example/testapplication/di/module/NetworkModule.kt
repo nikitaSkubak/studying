@@ -23,8 +23,8 @@ class NetworkModule {
         return interceptor
     }
 
-    @Provides
     @Singleton
+    @Provides
     fun provideStethoInterceptor(): StethoInterceptor {
         return StethoInterceptor()
     }
