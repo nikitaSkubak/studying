@@ -9,7 +9,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".usecase.post.PostActivity">
+        tools:context=".ui.post.PostActivity">
 
         <include
             android:id="@+id/content_posts"

@@ -11,6 +11,7 @@ import javax.inject.Inject
 class UserViewModel @Inject constructor(private val userUseCase: UserUseCase) : ViewModel() {
     val users by lazy { MutableLiveData<List<PlaceHolderUser>>() }
     private val disposable = CompositeDisposable()
+
     fun getUsers() {
         disposable.add(
                 userUseCase.getUsers()

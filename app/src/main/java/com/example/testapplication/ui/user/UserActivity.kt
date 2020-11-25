@@ -12,7 +12,7 @@ import com.example.testapplication.R
 import com.example.testapplication.api.PlaceHolderUser
 import com.example.testapplication.databinding.ActivityUserBinding
 import com.example.testapplication.main.ViewModelProviderFactory
-import com.example.testapplication.usecase.post.PostActivity
+import com.example.testapplication.ui.post.PostActivity
 import com.google.android.material.card.MaterialCardView
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
