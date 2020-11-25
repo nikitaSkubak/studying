@@ -13,11 +13,7 @@ class UserListAdapter: RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val currentUser = usersList[position]
-        holder.bindName(currentUser.name)
-        holder.bindUsername(currentUser.username)
-        holder.bindEmail(currentUser.email)
-        holder.bindAddress(currentUser.address.toString())
-        holder.bindId(currentUser.id)
+        holder.bindUser(currentUser)
     }
 
     override fun getItemCount(): Int = usersList.size
@@ -30,24 +26,8 @@ class UserListAdapter: RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
     class UserViewHolder private constructor(var binding: ItemUserBinding) :
             RecyclerView.ViewHolder(binding.root) {
 
-        fun bindName(name: String) {
-            binding.tvName.text = name
-        }
-
-        fun bindUsername(username: String) {
-            binding.tvUsername.text = username
-        }
-
-        fun bindEmail(email: String) {
-            binding.tvEmail.text = email
-        }
-
-        fun bindAddress(address: String) {
-            binding.tvAddress.text = address
-        }
-
-        fun bindId(id: Int) {
-            binding.mcvCard.contentDescription = "" + id
+        fun bindUser(user: PlaceHolderUser) {
+            binding.user = user
         }
 
         companion object {

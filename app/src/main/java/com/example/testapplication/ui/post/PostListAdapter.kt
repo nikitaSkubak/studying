@@ -9,7 +9,10 @@ import com.example.testapplication.databinding.ItemPostBinding
 class PostListAdapter: RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
     var listOfPosts: List<PlaceHolderPost> = listOf()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PostViewHolder.from(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
+        //здесь создать новый адаптер, а лучше еще чекнуть в интернете примеры
+       return PostViewHolder.from(parent)
+    }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val currentPost = listOfPosts[position]
