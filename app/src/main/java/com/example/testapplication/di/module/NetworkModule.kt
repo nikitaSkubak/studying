@@ -15,6 +15,7 @@ import javax.inject.Singleton
 
 @Module
 class NetworkModule {
+    val baseUrl = "https://jsonplaceholder.typicode.com/"
     @Singleton
     @Provides
     fun providesInterceptor(): HttpLoggingInterceptor {
@@ -51,7 +52,7 @@ class NetworkModule {
             .client(client)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .baseUrl("https://jsonplaceholder.typicode.com/")
+            .baseUrl(baseUrl)
             .build()
     }
 

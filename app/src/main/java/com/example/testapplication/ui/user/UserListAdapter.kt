@@ -17,6 +17,7 @@ class UserListAdapter: RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
         holder.bindUsername(currentUser.username)
         holder.bindEmail(currentUser.email)
         holder.bindAddress(currentUser.address.toString())
+        holder.bindId(currentUser.id)
     }
 
     override fun getItemCount(): Int = usersList.size
@@ -30,19 +31,23 @@ class UserListAdapter: RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
             RecyclerView.ViewHolder(binding.root) {
 
         fun bindName(name: String) {
-            binding.userName.text = name
+            binding.tvName.text = name
         }
 
         fun bindUsername(username: String) {
-            binding.userUsername.text = username
+            binding.tvUsername.text = username
         }
 
         fun bindEmail(email: String) {
-            binding.userEmail.text = email
+            binding.tvEmail.text = email
         }
 
         fun bindAddress(address: String) {
-            binding.userAddress.text = address
+            binding.tvAddress.text = address
+        }
+
+        fun bindId(id: Int) {
+            binding.mcvCard.contentDescription = "" + id
         }
 
         companion object {

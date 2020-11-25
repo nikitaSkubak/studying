@@ -1,6 +1,8 @@
 package com.example.testapplication.ui.user
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -10,6 +12,8 @@ import com.example.testapplication.R
 import com.example.testapplication.api.PlaceHolderUser
 import com.example.testapplication.databinding.ActivityUserBinding
 import com.example.testapplication.main.ViewModelProviderFactory
+import com.example.testapplication.usecase.post.PostActivity
+import com.google.android.material.card.MaterialCardView
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
@@ -17,9 +21,10 @@ class UserActivity : DaggerAppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProviderFactory
-    lateinit var userViewModel: UserViewModel
-    lateinit var binding: ActivityUserBinding
-    lateinit var adapter: UserListAdapter
+    private lateinit var userViewModel: UserViewModel
+    private lateinit var binding: ActivityUserBinding
+    private lateinit var adapter: UserListAdapter
+    private val REPLY = "com.example.testapplication.USER"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,5 +44,11 @@ class UserActivity : DaggerAppCompatActivity() {
 
     private inline fun <reified T : ViewModel> injectViewModel(factory: ViewModelProvider.Factory): T {
         return ViewModelProviders.of(this, factory)[T::class.java]
+    }
+
+    fun openPostsOfUser(v: View){
+        val intent = Intent(this, PostActivity::class.java)
+        intent.putExtra(REPLY, (v as MaterialCardView).contentDescription)
+        startActivity(intent)
     }
 }

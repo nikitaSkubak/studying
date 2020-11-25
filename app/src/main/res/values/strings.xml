@@ -4,4 +4,6 @@
     <string name="username">Username</string>
     <string name="email">email</string>
     <string name="address">address</string>
+    <string name="title">title</string>
+    <string name="body">body</string>
 </resources>
