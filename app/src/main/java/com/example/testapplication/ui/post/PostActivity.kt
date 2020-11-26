@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -45,6 +46,7 @@ class PostActivity : DaggerAppCompatActivity() {
             btnSearchTitle.setOnClickListener {
                 adapter.filter.filter(tvSearchTitle.text.toString())
             }
+            btnTheme.setOnClickListener { changeTheme() }
         }
     }
 
@@ -75,5 +77,15 @@ class PostActivity : DaggerAppCompatActivity() {
             }
         }
         return true
+    }
+
+    fun changeTheme() {
+        val nightMode = AppCompatDelegate.getDefaultNightMode()
+        if (nightMode == AppCompatDelegate.MODE_NIGHT_YES) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+        recreate()
     }
 }
