@@ -16,8 +16,7 @@ class PostListAdapter: RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val currentPost = listOfPosts[position]
-        holder.bindTitle(currentPost.title)
-        holder.bindBody(currentPost.body)
+        holder.bindPost(currentPost)
     }
 
     override fun getItemCount() = listOfPosts.size
@@ -30,12 +29,8 @@ class PostListAdapter: RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
     class PostViewHolder private constructor(var binding: ItemPostBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bindTitle(title: String) {
-            binding.tvTitle.text = title
-        }
-
-        fun bindBody(body: String) {
-            binding.tvBody.text = body
+        fun bindPost(post: PlaceHolderPost) {
+            binding.post = post
         }
 
         companion object {
