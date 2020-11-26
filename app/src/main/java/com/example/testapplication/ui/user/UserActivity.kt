@@ -42,6 +42,11 @@ class UserActivity : DaggerAppCompatActivity() {
         userViewModel.getUsers()
         userViewModel.users.observe(this, observer)
 
+        with(binding.appBar) {
+            btnSearchTitle.setOnClickListener {
+                adapter.filter.filter(tvSearchTitle.text.toString())
+            }
+        }
     }
 
     private val observer: Observer<List<PlaceHolderUser>> =

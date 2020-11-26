@@ -1,9 +1,12 @@
 package com.example.testapplication.ui.post
 
 import android.os.Bundle
+import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -36,9 +39,13 @@ class PostActivity : DaggerAppCompatActivity() {
 
         postViewModel = injectViewModel(viewModelFactory)
         postViewModel.getPosts(id)
-
         postViewModel.posts.observe(this, observer)
 
+        with(binding.appBar) {
+            btnSearchTitle.setOnClickListener {
+                adapter.filter.filter(tvSearchTitle.text.toString())
+            }
+        }
     }
 
     private val observer: Observer<List<PlaceHolderPost>> =

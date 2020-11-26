@@ -1,6 +1,6 @@
 package com.example.testapplication.api
 
-class PlaceHolderComment(
+data class PlaceHolderComment(
     val postId: Int,
     val id: Int,
     val name: String,

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
@@ -15,7 +14,7 @@
     android:layout_height="wrap_content">
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/btnTheme"
         android:layout_width="55dp"
         android:layout_height="0dp"
         android:src="@drawable/ic_sun"
@@ -23,12 +22,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="252dp"
+        android:layout_height="61dp"
+        app:layout_constraintStart_toEndOf="@+id/btnTheme"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tvSearchTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/title" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_marginStart="50dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageButton" />
+        app:layout_constraintStart_toEndOf="@+id/textInputLayout"
+        app:layout_constraintTop_toTopOf="@+id/btnTheme" />
+
+    <ImageButton
+        android:id="@+id/btnSearchTitle"
+        android:layout_width="49dp"
+        android:layout_height="52dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/toolbar"
+        app:layout_constraintStart_toEndOf="@+id/textInputLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_search" />
 </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.AppBarLayout>
 </layout>
