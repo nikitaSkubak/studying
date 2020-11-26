@@ -2,8 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-    </data>
+    <data></data>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -11,8 +10,11 @@
         tools:context=".ui.user.UserActivity">
 
         <include
+            android:id="@+id/app_bar"
+            layout="@layout/app_bar" />
+
+        <include
             android:id="@+id/content_user"
             layout="@layout/content_users" />
-
     </FrameLayout>
 </layout>

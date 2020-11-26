@@ -12,6 +12,10 @@
         tools:context=".ui.post.PostActivity">
 
         <include
+            android:id="@+id/app_bar"
+            layout="@layout/app_bar" />
+
+        <include
             android:id="@+id/content_posts"
             layout="@layout/content_posts" />
     </FrameLayout>

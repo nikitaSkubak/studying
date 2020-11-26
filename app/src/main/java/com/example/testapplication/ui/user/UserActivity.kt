@@ -2,7 +2,10 @@ package com.example.testapplication.ui.user
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -24,11 +27,13 @@ class UserActivity : DaggerAppCompatActivity() {
     private lateinit var userViewModel: UserViewModel
     private lateinit var binding: ActivityUserBinding
     private lateinit var adapter: UserListAdapter
+    private var sortAscending = true
     private val REPLY = "com.example.testapplication.USER"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_user)
+        setSupportActionBar(binding.appBar.toolbar)
 
         adapter = UserListAdapter()
         binding.contentUser.rvUser.adapter = adapter
@@ -46,9 +51,30 @@ class UserActivity : DaggerAppCompatActivity() {
         return ViewModelProviders.of(this, factory)[T::class.java]
     }
 
-    fun openPostsOfUser(v: View){
+    fun openPostsOfUser(v: View) {
         val intent = Intent(this, PostActivity::class.java)
         intent.putExtra(REPLY, (v as MaterialCardView).contentDescription)
         startActivity(intent)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.iSort -> {
+                adapter.usersList = if (sortAscending)
+                    adapter.usersList.sortedBy { it.username }
+                else
+                    adapter.usersList.sortedByDescending { it.username }
+                sortAscending = !sortAscending
+                binding.contentUser.rvUser.adapter = adapter
+                binding.contentUser.rvUser.adapter!!.notifyDataSetChanged()
+                Toast.makeText(this, "Sort", Toast.LENGTH_SHORT).show()
+            }
+        }
+        return true
     }
 }
