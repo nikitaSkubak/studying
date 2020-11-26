@@ -11,12 +11,17 @@ class PostListAdapter: RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         //здесь создать новый адаптер, а лучше еще чекнуть в интернете примеры
-       return PostViewHolder.from(parent)
+       return PostViewHolder.from(parent, CommentListAdapter())
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val currentPost = listOfPosts[position]
-        holder.bindPost(currentPost)
+        with(holder){
+            bindPost(currentPost)
+            adapter.setPosts(currentPost.comments)
+            binding.contentComments.adapter = adapter
+        }
+
     }
 
     override fun getItemCount() = listOfPosts.size
@@ -26,7 +31,9 @@ class PostListAdapter: RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
         notifyDataSetChanged()
     }
 
-    class PostViewHolder private constructor(var binding: ItemPostBinding) :
+    class PostViewHolder private constructor(
+            var binding: ItemPostBinding,
+            var adapter: CommentListAdapter) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bindPost(post: PlaceHolderPost) {
@@ -34,10 +41,10 @@ class PostListAdapter: RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
         }
 
         companion object {
-            fun from(parent: ViewGroup): PostViewHolder {
+            fun from(parent: ViewGroup, adapter: CommentListAdapter): PostViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemPostBinding.inflate(layoutInflater, parent, false)
-                return PostViewHolder(binding)
+                return PostViewHolder(binding, adapter)
             }
         }
     }

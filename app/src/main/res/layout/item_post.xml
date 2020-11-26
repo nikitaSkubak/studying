@@ -1,72 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="post"
             type="com.example.testapplication.api.PlaceHolderPost" />
     </data>
-    <com.google.android.material.card.MaterialCardView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="8dp">
+        android:layout_margin="10dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="14dp">
+            android:padding="15dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_comments"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:hint="count of comments"
-                android:text="@{String.valueOf(post.comments.size())}"
-                app:layout_constraintEnd_toStartOf="@+id/tvCommentsCount"
-                app:layout_constraintTop_toBottomOf="@+id/tvBody" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvCommentsCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Comments"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvBody" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvTitle"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="14dp"
-                android:hint="@string/title"
-                android:text="@{post.title}"
+                android:padding="14dp">
 
-                android:textAlignment="gravity"
-                android:textSize="20sp"
-                android:textStyle="bold|italic"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_comments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:hint="count of comments"
+                    android:text="@{String.valueOf(post.comments.size())}"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintEnd_toStartOf="@+id/tvCommentsCount"
+                    app:layout_constraintTop_toTopOf="@+id/tvCommentsCount" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvBody"
-                style="@style/TextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="10dp"
-                android:hint="@string/body"
-                android:text="@{post.body}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvCommentsCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Comments"
+                    app:layout_constraintEnd_toEndOf="@+id/tvBody"
+                    app:layout_constraintTop_toBottomOf="@+id/tvBody" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="14dp"
+                    android:hint="@string/title"
+                    android:text="@{post.title}"
+
+                    android:textAlignment="gravity"
+                    android:textSize="20sp"
+                    android:textStyle="bold|italic"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvBody"
+                    style="@style/TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/body"
+                    android:text="@{post.body}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/tvBody"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_comments">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/content_comments"
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        android:layout_marginTop="10dp"
+                        android:padding="15dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_comment" />
+                </ScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 </layout>
