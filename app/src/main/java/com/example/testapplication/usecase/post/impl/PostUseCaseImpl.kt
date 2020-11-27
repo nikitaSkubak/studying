@@ -45,10 +45,8 @@ class PostUseCaseImpl @Inject constructor(
                                 }.toList().toObservable()
                     }, { apiPost, comments ->
                         commentRepository.insertComments(comments)
-                        //Post(apiPost.userId, apiPost.id, apiPost.title, apiPost.body)
                         apiPost.comments = comments
                         return@flatMap Observable.just(apiPost)
                     }).flatMap { it }
                     .toList()
-    //вставить список в insert
 }

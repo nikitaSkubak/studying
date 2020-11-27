@@ -3,7 +3,6 @@ package com.example.testapplication.ui.post
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.testapplication.api.PlaceHolderComment
 import com.example.testapplication.dataBase.Comment
 import com.example.testapplication.databinding.ItemCommentBinding
 

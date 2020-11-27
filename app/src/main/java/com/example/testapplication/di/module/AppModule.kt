@@ -3,8 +3,6 @@ package com.example.testapplication.di.module
 import android.app.Application
 import android.content.Context
 import com.example.testapplication.di.MyApplication
-import com.example.testapplication.repository.UserRepository
-import com.example.testapplication.repository.impl.UserRepositoryImpl
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module

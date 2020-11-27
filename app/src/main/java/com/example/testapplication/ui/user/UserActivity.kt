@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.testapplication.R
-import com.example.testapplication.api.PlaceHolderUser
 import com.example.testapplication.dataBase.User
 import com.example.testapplication.databinding.ActivityUserBinding
 import com.example.testapplication.main.ViewModelProviderFactory

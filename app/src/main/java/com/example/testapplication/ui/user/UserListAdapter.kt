@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
-import com.example.testapplication.api.PlaceHolderUser
 import com.example.testapplication.dataBase.User
 import com.example.testapplication.databinding.ItemUserBinding
 

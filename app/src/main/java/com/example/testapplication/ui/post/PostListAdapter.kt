@@ -6,7 +6,6 @@ import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testapplication.api.PlaceHolderPost
-import com.example.testapplication.dataBase.Post
 import com.example.testapplication.databinding.ItemPostBinding
 
 class PostListAdapter : RecyclerView.Adapter<PostListAdapter.PostViewHolder>(), Filterable {
