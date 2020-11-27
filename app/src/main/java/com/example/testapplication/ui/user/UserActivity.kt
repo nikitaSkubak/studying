@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.testapplication.R
 import com.example.testapplication.api.PlaceHolderUser
+import com.example.testapplication.dataBase.User
 import com.example.testapplication.databinding.ActivityUserBinding
 import com.example.testapplication.main.ViewModelProviderFactory
 import com.example.testapplication.ui.post.PostActivity
@@ -51,7 +52,7 @@ class UserActivity : DaggerAppCompatActivity() {
         }
     }
 
-    private val observer: Observer<List<PlaceHolderUser>> =
+    private val observer: Observer<List<User>> =
             Observer { users -> adapter.setUsers(users) }
 
     private inline fun <reified T : ViewModel> injectViewModel(factory: ViewModelProvider.Factory): T {

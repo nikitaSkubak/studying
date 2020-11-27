@@ -6,10 +6,11 @@ import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testapplication.api.PlaceHolderUser
+import com.example.testapplication.dataBase.User
 import com.example.testapplication.databinding.ItemUserBinding
 
 class UserListAdapter: RecyclerView.Adapter<UserListAdapter.UserViewHolder>(), Filterable {
-    var usersList: List<PlaceHolderUser> = listOf()
+    var usersList: List<User> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = UserViewHolder.from(parent)
 
@@ -20,7 +21,7 @@ class UserListAdapter: RecyclerView.Adapter<UserListAdapter.UserViewHolder>(), F
 
     override fun getItemCount(): Int = usersList.size
 
-    fun setUsers(users: List<PlaceHolderUser>) {
+    fun setUsers(users: List<User>) {
         usersList = users
         notifyDataSetChanged()
     }
@@ -28,7 +29,7 @@ class UserListAdapter: RecyclerView.Adapter<UserListAdapter.UserViewHolder>(), F
     class UserViewHolder private constructor(var binding: ItemUserBinding) :
             RecyclerView.ViewHolder(binding.root) {
 
-        fun bindUser(user: PlaceHolderUser) {
+        fun bindUser(user: User) {
             binding.user = user
         }
 
@@ -41,12 +42,12 @@ class UserListAdapter: RecyclerView.Adapter<UserListAdapter.UserViewHolder>(), F
         }
     }
 
-    inner class ItemFilter(val listOfUsers: List<PlaceHolderUser>) : Filter() {
+    inner class ItemFilter(val listOfUsers: List<User>) : Filter() {
         override fun performFiltering(constraint: CharSequence): FilterResults {
 
             val filterString = constraint.toString()
             val results = FilterResults()
-            val filteredListOfUsers: ArrayList<PlaceHolderUser> = arrayListOf()
+            val filteredListOfUsers: ArrayList<User> = arrayListOf()
             lateinit var filterableString: String
 
             listOfUsers.forEach { user ->
@@ -60,7 +61,7 @@ class UserListAdapter: RecyclerView.Adapter<UserListAdapter.UserViewHolder>(), F
         }
         @SuppressWarnings("unchecked")
         override fun publishResults(constraint: CharSequence, results: FilterResults) {
-            usersList = results.values as List<PlaceHolderUser>
+            usersList = results.values as List<User>
             notifyDataSetChanged()
         }
     }

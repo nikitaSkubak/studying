@@ -1,8 +1,8 @@
 package com.example.testapplication.usecase.user
 
-import com.example.testapplication.api.PlaceHolderUser
+import com.example.testapplication.dataBase.User
 import io.reactivex.Single
 
 interface UserUseCase {
-    fun getUsers(): Single<List<PlaceHolderUser>>
+    fun getUsersFromApiAndSaveThemIntoDB(): Single<List<User>>
 }

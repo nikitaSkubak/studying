@@ -4,5 +4,5 @@ import com.example.testapplication.api.PlaceHolderPost
 import io.reactivex.Single
 
 interface PostUseCase {
-    fun getPosts(id: Int): Single<List<PlaceHolderPost>>
+    fun getPostsFromPlaceHolderApi(id: Int): Single<List<PlaceHolderPost>>
 }

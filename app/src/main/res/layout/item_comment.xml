@@ -7,7 +7,7 @@
 
         <variable
             name="comment"
-            type="com.example.testapplication.api.PlaceHolderComment" />
+            type="com.example.testapplication.dataBase.Comment" />
     </data>
 
     <LinearLayout
