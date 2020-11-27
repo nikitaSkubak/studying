@@ -17,13 +17,15 @@ class PostUseCaseImpl @Inject constructor(
 ) : PostUseCase {
     override fun getPostsFromPlaceHolderApi(id: Int): Single<List<PlaceHolderPost>> =
             postRepository
-                    .getPosts()
+                    .getPostsFromPlaceHolderAPi()
                     .subscribeOn(Schedulers.io())
                     .toObservable()
                     .flatMapIterable { it }
                     .filter { post -> post.userId == id }.toList()
                     .map {
-                        postRepository.insertPosts(postRepository.convertListOFPlaceHolderPostToListOfPost(it))
+                        postRepository.insertPosts(it.map { apiPost ->
+                            Post(apiPost.userId, apiPost.id, apiPost.title, apiPost.body)
+                        })
                         it
                     }
                     .toObservable()

@@ -11,12 +11,13 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class UserRepositoryImpl
-@Inject constructor(private val dao: UserDao, private val placeHolder: PlaceHolderApi): UserRepository {
+@Inject constructor(
+        private val dao: UserDao,
+        private val placeHolder: PlaceHolderApi
+) : UserRepository {
 
     override fun getUsersFromPlaceHolderApi(): Single<List<PlaceHolderUser>> =
             placeHolder.getUsers()
 
-    override fun getUsersFromDB(): Single<List<User>> = dao.getUsers()
-
-    override fun insertUsers(users: List<User>) =  Observable.just(dao.insertUsers(users))
+    override fun insertUsers(users: List<User>) = Observable.just(dao.insertUsers(users))
 }

@@ -16,16 +16,10 @@ class PostRepositoryImpl @Inject constructor(
         private val placeholder: PlaceHolderApi
 ) : PostRepository {
 
-    override fun getPosts(): Single<List<PlaceHolderPost>> =
+    override fun getPostsFromPlaceHolderAPi(): Single<List<PlaceHolderPost>> =
             placeholder.getPosts()
 
     override fun insertPosts(posts: List<Post>) = Observable.just(dao.insertPosts(posts))
-
-    override fun convertListOFPlaceHolderPostToListOfPost(
-            listOfPlaceHolderPost: List<PlaceHolderPost>
-    ) = listOfPlaceHolderPost.map { apiPost ->
-        Post(apiPost.userId, apiPost.id, apiPost.title, apiPost.body)
-    }
 
 
 }

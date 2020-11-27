@@ -7,9 +7,15 @@ import io.reactivex.Observable
 import io.reactivex.Single
 
 interface UserRepository {
+    /**
+     *Returns list of PlaceHolderUser`s from PlaceHolderApi
+     * @return Single that contains List<PlaceHolderUser>.
+     **/
     fun getUsersFromPlaceHolderApi(): Single<List<PlaceHolderUser>>
-
-    fun getUsersFromDB():  Single<List<User>>
-
+    /**
+     *Inserts list of PlaceHolderUser`s into DataBase
+     * @return Observable that contains `id` list of successfully inserted `users`.
+     * @param users List<User> to set the list of users into DataBase table `user`.
+     **/
     fun insertUsers(users: List<User>): Observable<List<Long>>
 }
