@@ -18,6 +18,4 @@ class PostRepositoryImpl @Inject constructor(
             placeholder.getPosts()
 
     override fun insertPosts(posts: List<Post>) = Observable.just(dao.insertPosts(posts))
-
-
 }

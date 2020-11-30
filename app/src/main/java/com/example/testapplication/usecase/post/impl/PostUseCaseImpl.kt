@@ -1,11 +1,11 @@
 package com.example.testapplication.usecase.post.impl
 
 import com.example.testapplication.api.PlaceHolderPost
-import com.example.testapplication.dataBase.Comment
-import com.example.testapplication.dataBase.Post
 import com.example.testapplication.repository.CommentRepository
 import com.example.testapplication.repository.PostRepository
 import com.example.testapplication.usecase.post.PostUseCase
+import com.example.testapplication.util.toComment
+import com.example.testapplication.util.toPost
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -15,18 +15,17 @@ class PostUseCaseImpl @Inject constructor(
         private val postRepository: PostRepository,
         private val commentRepository: CommentRepository
 ) : PostUseCase {
+    
     override fun getPostsFromPlaceHolderApi(id: Int): Single<List<PlaceHolderPost>> =
             postRepository
                     .getPostsFromPlaceHolderAPi()
                     .subscribeOn(Schedulers.io())
                     .toObservable()
                     .flatMapIterable { it }
-                    .filter { post -> post.userId == id }.toList()
-                    .map {
-                        postRepository.insertPosts(it.map { apiPost ->
-                            Post(apiPost.userId, apiPost.id, apiPost.title, apiPost.body)
-                        })
-                        it
+                    .filter { it.userId == id }.toList()
+                    .map { listOfApiPosts ->
+                        postRepository.insertPosts(listOfApiPosts.map { it.toPost() })
+                        listOfApiPosts
                     }
                     .toObservable()
                     .flatMapIterable { it }
@@ -34,15 +33,9 @@ class PostUseCaseImpl @Inject constructor(
                         commentRepository.getCommentsFromPlaceHolderApi(post.id)
                                 .toObservable()
                                 .flatMapIterable { it }
-                                .map { apiComment ->
-                                    Comment(
-                                            apiComment.postId,
-                                            apiComment.id,
-                                            apiComment.name,
-                                            apiComment.email,
-                                            apiComment.body
-                                    )
-                                }.toList().toObservable()
+                                .map { it.toComment() }
+                                .toList()
+                                .toObservable()
                     }, { apiPost, comments ->
                         commentRepository.insertComments(comments)
                         apiPost.comments = comments

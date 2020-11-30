@@ -13,6 +13,7 @@ class CommentRepositoryImpl @Inject constructor(
         private val dao: CommentDao,
         private val placeholder: PlaceHolderApi
 ) : CommentRepository {
+
     override fun getCommentsFromPlaceHolderApi(id: Int): Single<List<PlaceHolderComment>> =
             placeholder.getComments(id)
 
