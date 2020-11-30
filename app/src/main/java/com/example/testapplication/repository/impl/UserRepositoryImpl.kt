@@ -18,5 +18,8 @@ class UserRepositoryImpl
     override fun getUsersFromPlaceHolderApi(): Single<List<PlaceHolderUser>> =
             placeHolder.getUsers()
 
-    override fun insertUsers(users: List<User>) = Observable.just(dao.insertUsers(users))
+    override fun insertUsers(users: List<User>) =
+            Single.just(dao.insertUsers(users)).flatMap { Single.just(users) }
+
+    override fun getUsersFromDB() = dao.getUsers()
 }

@@ -15,7 +15,7 @@ class PostUseCaseImpl @Inject constructor(
         private val postRepository: PostRepository,
         private val commentRepository: CommentRepository
 ) : PostUseCase {
-    
+
     override fun getPostsFromPlaceHolderApi(id: Int): Single<List<PlaceHolderPost>> =
             postRepository
                     .getPostsFromPlaceHolderAPi()
@@ -32,13 +32,10 @@ class PostUseCaseImpl @Inject constructor(
                     .flatMap({ post ->
                         commentRepository.getCommentsFromPlaceHolderApi(post.id)
                                 .toObservable()
-                                .flatMapIterable { it }
-                                .map { it.toComment() }
-                                .toList()
-                                .toObservable()
                     }, { apiPost, comments ->
-                        commentRepository.insertComments(comments)
-                        apiPost.comments = comments
+                        val commentsToDb = comments.map { it.toComment() }
+                        commentRepository.insertComments(commentsToDb)
+                        apiPost.comments = commentsToDb
                         return@flatMap Observable.just(apiPost)
                     }).flatMap { it }
                     .toList()

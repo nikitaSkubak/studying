@@ -8,7 +8,7 @@ import com.example.testapplication.dataBase.dao.CommentDao
 import com.example.testapplication.dataBase.dao.PostDao
 import com.example.testapplication.dataBase.dao.UserDao
 
-@Database(entities = [User::class, Post::class, Comment::class], version = 1, exportSchema = false)
+@Database(entities = [User::class, Post::class, Comment::class], version = 2, exportSchema = false)
 abstract class TwitRoomDataBase : RoomDatabase() {
 
     abstract fun getUserDao(): UserDao

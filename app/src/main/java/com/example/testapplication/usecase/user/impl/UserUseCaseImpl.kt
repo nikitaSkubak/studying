@@ -14,10 +14,7 @@ class UserUseCaseImpl @Inject constructor(private val repository: UserRepository
             repository
                     .getUsersFromPlaceHolderApi()
                     .toObservable()
-                    .flatMapIterable { it }
-                    .map { it.toUser() }
-                    .toList()
-                    .map { repository.insertUsers(it); it }
+                    .flatMapSingle { repository.insertUsers(it.map { it.toUser() })  }.toList()
+                    .flatMap { repository.getUsersFromDB() }
                     .subscribeOn(Schedulers.io())
-
 }
