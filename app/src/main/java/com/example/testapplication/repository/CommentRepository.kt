@@ -16,5 +16,5 @@ interface CommentRepository {
      * @return Observable that contains list of comments id  that were successfully inserted.
      * @param comments List<Comment> to set the list into DataBase table `comments`.
      **/
-    fun insertComments(comments: List<Comment>): Observable<List<Long>>
+    fun insertComments(comments: List<Comment>): Single<List<Long>>
 }

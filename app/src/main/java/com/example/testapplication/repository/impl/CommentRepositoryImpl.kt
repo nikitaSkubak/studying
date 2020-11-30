@@ -17,6 +17,5 @@ class CommentRepositoryImpl @Inject constructor(
     override fun getCommentsFromPlaceHolderApi(id: Int): Single<List<PlaceHolderComment>> =
             placeholder.getComments(id)
 
-    override fun insertComments(comments: List<Comment>) =
-            Observable.just(dao.insertComments(comments))
+    override fun insertComments(comments: List<Comment>) = dao.insertComments(comments)
 }

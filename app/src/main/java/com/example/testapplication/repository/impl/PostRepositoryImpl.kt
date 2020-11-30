@@ -17,5 +17,5 @@ class PostRepositoryImpl @Inject constructor(
     override fun getPostsFromPlaceHolderAPi(): Single<List<PlaceHolderPost>> =
             placeholder.getPosts()
 
-    override fun insertPosts(posts: List<Post>) = Observable.just(dao.insertPosts(posts))
+    override fun insertPosts(posts: List<Post>) = dao.insertPosts(posts)
 }

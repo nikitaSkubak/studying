@@ -16,5 +16,5 @@ interface PostRepository {
      * @return Observable that contains list of post`s id that were successfully inserted.
      * @param posts List<Post> to set the list of posts into DataBase table `post`.
      **/
-    fun insertPosts(posts: List<Post>): Observable<List<Long>>
+    fun insertPosts(posts: List<Post>): Single<List<Long>>
 }
