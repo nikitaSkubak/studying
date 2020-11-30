@@ -54,21 +54,17 @@ class PostListAdapter : RecyclerView.Adapter<PostListAdapter.PostViewHolder>(), 
         return ItemFilter(listOfPosts)
     }
 
-   inner class ItemFilter(val postList: List<PlaceHolderPost>) : Filter() {
+   inner class ItemFilter(private val postList: List<PlaceHolderPost>) : Filter() {
         override fun performFiltering(constraint: CharSequence): FilterResults {
 
             val filterString = constraint.toString()
             val results = FilterResults()
-            val filteredListOfPosts: ArrayList<PlaceHolderPost> = arrayListOf()
-            lateinit var filterableString: String
 
-            postList.forEach { post ->
-                filterableString = post.title
-                if (filterableString.contains(filterString))
-                    filteredListOfPosts.add(post)
+             val filteredList = postList.filter { post ->
+                post.title.contains(filterString)
             }
-            results.values = filteredListOfPosts
-            results.count = filteredListOfPosts.size
+            results.values = filteredList
+            results.count = filteredList.size
             return results
         }
         @SuppressWarnings("unchecked")

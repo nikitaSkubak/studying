@@ -41,21 +41,17 @@ class UserListAdapter: RecyclerView.Adapter<UserListAdapter.UserViewHolder>(), F
         }
     }
 
-    inner class ItemFilter(val listOfUsers: List<User>) : Filter() {
+    inner class ItemFilter(private val listOfUsers: List<User>) : Filter() {
         override fun performFiltering(constraint: CharSequence): FilterResults {
 
             val filterString = constraint.toString()
             val results = FilterResults()
-            val filteredListOfUsers: ArrayList<User> = arrayListOf()
-            lateinit var filterableString: String
 
-            listOfUsers.forEach { user ->
-                filterableString = user.username
-                if (filterableString == filterString)
-                    filteredListOfUsers.add(user)
+            val filteredList = listOfUsers.filter { user ->
+               user.username == filterString
             }
-            results.values = filteredListOfUsers
-            results.count = filteredListOfUsers.size
+            results.values = filteredList
+            results.count = filteredList.size
             return results
         }
         @SuppressWarnings("unchecked")
