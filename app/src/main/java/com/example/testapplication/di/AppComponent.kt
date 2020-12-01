@@ -2,6 +2,7 @@ package com.example.testapplication.di
 
 import com.example.testapplication.di.module.ActivityModule
 import com.example.testapplication.di.module.AppModule
+import com.example.testapplication.di.module.FragmentModule
 import com.example.testapplication.di.module.ViewModelModule
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -14,6 +15,7 @@ import javax.inject.Singleton
     modules = [
         AppModule::class,
         ActivityModule::class,
+        FragmentModule::class,
         ViewModelModule::class,
         AndroidInjectionModule::class,
         AndroidSupportInjectionModule::class

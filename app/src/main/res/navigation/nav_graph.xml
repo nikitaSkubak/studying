@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/userFragment">
+
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.example.testapplication.ui.user.UserFragment"
+        android:label="UserFragment" >
+        <action
+            android:id="@+id/action_userFragment_to_postFragment"
+            app:destination="@id/postFragment" >
+            <argument android:name="userId"
+                app:argType="integer"
+                android:defaultValue="1"/>
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/postFragment"
+        android:name="com.example.testapplication.ui.post.PostFragment"
+        android:label="fragment_post"
+        tools:layout="@layout/fragment_post" />
+</navigation>
