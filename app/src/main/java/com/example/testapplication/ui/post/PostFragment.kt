@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.testapplication.api.PlaceHolderPost
 import com.example.testapplication.databinding.FragmentPostBinding
 import com.example.testapplication.main.ViewModelProviderFactory
+import com.example.testapplication.vo.Resource
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.seacrh_layout.view.*
 import javax.inject.Inject
@@ -61,8 +62,8 @@ class PostFragment : DaggerFragment() {
         return ViewModelProviders.of(this, factory)[T::class.java]
     }
 
-    private val observer: Observer<List<PlaceHolderPost>> =
-        Observer { posts -> adapter.setPosts(posts) }
+    private val observer: Observer<Resource<List<PlaceHolderPost>>> =
+        Observer {  adapter.setPosts(it.data!!) }
 
     private fun sortPosts() {
         adapter.listOfPosts = if (sortAscending)

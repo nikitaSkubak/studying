@@ -69,35 +69,11 @@ dependencies {
     implementation "com.facebook.stetho:stetho:1.5.1"
     implementation "com.facebook.stetho:stetho-okhttp3:1.5.0"
 
-    //lifecycle componentents
+    //lifecycle components
     implementation "android.arch.lifecycle:extensions:$rootProject.archLifecycleVersion"
     kapt "android.arch.lifecycle:compiler:$rootProject.archLifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     kapt "androidx.lifecycle:lifecycle-compiler:2.3.0-beta01"
-
-    // easyLocation
-    implementation 'com.github.robinkrsingh:easylocation:0.1.0'
-
-    // MediaFacer Library
-    implementation 'com.github.CodeBoy722:MediaFacer:1.0.2'
-
-    //uCrop
-    implementation 'com.github.yalantis:ucrop:2.2.6'
-    implementation 'com.github.yalantis:ucrop:2.2.6'
-
-    //PhotoEditor
-    implementation 'ja.burhanrashid52:photoeditor:1.0.0'
-    implementation "androidx.core:core-ktx:+"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
-    //TedPermission
-    implementation 'gun0912.ted:tedpermission:2.1.0'
-    
-    //Glide
-    implementation'com.github.bumptech.glide:glide:4.11.0'
-    implementation 'com.google.android.gms:play-services-maps:17.0.0'
-    kapt 'com.github.bumptech.glide:compiler:4.11.0'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.android.volley:volley:1.1.1'

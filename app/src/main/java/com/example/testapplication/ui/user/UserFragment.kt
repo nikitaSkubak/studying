@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.testapplication.dataBase.User
 import com.example.testapplication.databinding.FragmentUserBinding
 import com.example.testapplication.main.ViewModelProviderFactory
+import com.example.testapplication.vo.Resource
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.seacrh_layout.view.*
 import javax.inject.Inject
@@ -25,8 +26,8 @@ class UserFragment : DaggerFragment() {
     private var sortAscending = true
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         binding = FragmentUserBinding.inflate(layoutInflater, container, false)
 
@@ -41,16 +42,17 @@ class UserFragment : DaggerFragment() {
             btnSearchTitle.setOnClickListener {
                 adapter.filter.filter(tvSearchTitle.text.toString())
             }
-            btnSort.setOnClickListener{ sortUsers() }
+            btnSort.setOnClickListener { sortUsers() }
         }
-            return binding.root
+        return binding.root
     }
 
     private inline fun <reified T : ViewModel> injectViewModel(factory: ViewModelProvider.Factory): T {
         return ViewModelProviders.of(this, factory)[T::class.java]
     }
-private val observer: Observer<List<User>> =
-    Observer { users -> adapter.setUsers(users) }
+
+    private val observer: Observer<Resource<List<User>>> =
+            Observer { users -> adapter.setUsers(users.data!!) }
 
     private fun sortUsers() {
         adapter.usersList = if (sortAscending)
