@@ -37,7 +37,7 @@ class UserFragment : DaggerFragment() {
 
         userViewModel = injectViewModel(viewModelFactory)
         userViewModel.getUsers()
-        userViewModel.userData.observe(viewLifecycleOwner, userObserver)
+        userViewModel.usersData.observe(viewLifecycleOwner, usersObserver)
 
         with(binding.lSearch) {
             btnSearchTitle.setOnClickListener {
@@ -52,12 +52,12 @@ class UserFragment : DaggerFragment() {
         return ViewModelProviders.of(this, factory)[T::class.java]
     }
 
-    private val userObserver: Observer<Resource<List<User>>> =
+    private val usersObserver: Observer<Resource<List<User>>> =
             Observer {
                 when (it.status) {
                     Status.SUCCESS -> adapter.setUsers(it.data!!)
                     Status.ERROR -> Toast
-                            .makeText(this.context, "error 404", Toast.LENGTH_SHORT)
+                            .makeText(this.context, it.message, Toast.LENGTH_SHORT)
                             .show()
                     Status.LOADING -> Toast
                             .makeText(this.context, "loading", Toast.LENGTH_SHORT)

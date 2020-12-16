@@ -47,7 +47,7 @@ class PostFragment : DaggerFragment() {
 
         postViewModel = injectViewModel(viewModelFactory)
         postViewModel.getPosts(userId)
-        postViewModel.postData.observe(viewLifecycleOwner, postObserver)
+        postViewModel.postsData.observe(viewLifecycleOwner, postsObserver)
 
         with(binding.lSearch) {
             btnSearchTitle.setOnClickListener {
@@ -63,7 +63,7 @@ class PostFragment : DaggerFragment() {
         return ViewModelProviders.of(this, factory)[T::class.java]
     }
 
-    private val postObserver: Observer<Resource<List<PlaceHolderPost>>> =
+    private val postsObserver: Observer<Resource<List<PlaceHolderPost>>> =
             Observer {
                 when (it.status) {
                     Status.SUCCESS -> adapter.setPosts(it.data!!)
@@ -71,7 +71,7 @@ class PostFragment : DaggerFragment() {
                             .makeText(this.context, "loading", Toast.LENGTH_SHORT)
                             .show()
                     Status.ERROR -> Toast
-                            .makeText(this.context, "error 404", Toast.LENGTH_SHORT)
+                            .makeText(this.context, it.message, Toast.LENGTH_SHORT)
                             .show()
                 }
             }

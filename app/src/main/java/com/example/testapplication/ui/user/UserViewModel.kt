@@ -10,7 +10,7 @@ import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 class UserViewModel @Inject constructor(private val userUseCase: UserUseCase) : ViewModel() {
-    val userData by lazy { MutableLiveData<Resource<List<User>>>() }
+    val usersData by lazy { MutableLiveData<Resource<List<User>>>() }
     private val disposable = CompositeDisposable()
 
     fun getUsers() {
@@ -18,9 +18,9 @@ class UserViewModel @Inject constructor(private val userUseCase: UserUseCase) : 
                 userUseCase.getUsersFromApiAndSaveThemIntoDB()
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
-                                { listOfUsers -> userData.value = Resource.success(listOfUsers) },
+                                { listOfUsers -> usersData.value = Resource.success(listOfUsers) },
                                 {
-                                    userData.value = Resource.error(
+                                    usersData.value = Resource.error(
                                             it.stackTraceToString(),
                                             null)
                                 }))

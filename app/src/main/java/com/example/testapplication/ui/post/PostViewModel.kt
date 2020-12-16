@@ -10,7 +10,7 @@ import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 class PostViewModel @Inject constructor(private val repository: PostUseCase) : ViewModel() {
-    val postData by lazy {
+    val postsData by lazy {
         MutableLiveData<Resource<List<PlaceHolderPost>>>()
     }
     private val disposable = CompositeDisposable()
@@ -19,8 +19,8 @@ class PostViewModel @Inject constructor(private val repository: PostUseCase) : V
         disposable.add(repository.getPostsFromPlaceHolderApi(id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { listOfPosts -> postData.value = Resource.success(listOfPosts) },
-                        { postData.value = Resource.error(it.stackTraceToString(), null) }))
+                        { listOfPosts -> postsData.value = Resource.success(listOfPosts) },
+                        { postsData.value = Resource.error(it.stackTraceToString(), null) }))
     }
 
 }
