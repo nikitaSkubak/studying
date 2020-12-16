@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.testapplication.api.PlaceHolderPost
 import com.example.testapplication.databinding.FragmentPostBinding
 import com.example.testapplication.main.ViewModelProviderFactory
+import com.example.testapplication.util.CustomKt
 import com.example.testapplication.vo.Resource
 import com.example.testapplication.vo.Status
 import dagger.android.support.DaggerFragment
@@ -42,6 +43,12 @@ class PostFragment : DaggerFragment() {
             savedInstanceState: Bundle?
     ): View {
         binding = FragmentPostBinding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         adapter = PostListAdapter()
         binding.contentPosts.rvPost.adapter = adapter
 
@@ -52,7 +59,6 @@ class PostFragment : DaggerFragment() {
         CustomKt.forThem(btnSearchTitle, btnSort) {
             setOnClickListener(clickListener)
         }
-        return binding.root
     }
 
     private inline fun <reified T : ViewModel> injectViewModel(factory: ViewModelProvider.Factory): T {
@@ -93,10 +99,6 @@ class PostFragment : DaggerFragment() {
             btnSort.id -> { sortPosts() }
         }
     }
-    object CustomKt {
-        inline fun <T> forThem(vararg objs: T, block: T.() -> Unit) {
-            for (obj in objs)
-                obj.block()
-        }
-    }
+
+
 }

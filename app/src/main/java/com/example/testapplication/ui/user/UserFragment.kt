@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.testapplication.dataBase.User
 import com.example.testapplication.databinding.FragmentUserBinding
 import com.example.testapplication.main.ViewModelProviderFactory
+import com.example.testapplication.util.CustomKt
 import com.example.testapplication.vo.Resource
 import com.example.testapplication.vo.Status
 import dagger.android.support.DaggerFragment
@@ -31,6 +32,15 @@ class UserFragment : DaggerFragment() {
             savedInstanceState: Bundle?
     ): View {
         binding = FragmentUserBinding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        CustomKt.forThem(btnSearchTitle, btnSort) {
+            setOnClickListener(clickListener)
+        }
 
         adapter = UserListAdapter()
         binding.contentUser.rvUser.adapter = adapter
@@ -38,12 +48,6 @@ class UserFragment : DaggerFragment() {
         userViewModel = injectViewModel(viewModelFactory)
         userViewModel.getUsers()
         userViewModel.usersData.observe(viewLifecycleOwner, usersObserver)
-
-        CustomKt.forThem(btnSearchTitle, btnSort) {
-            setOnClickListener(clickListener)
-        }
-
-        return binding.root
     }
 
     private inline fun <reified T : ViewModel> injectViewModel(factory: ViewModelProvider.Factory): T {
@@ -80,12 +84,6 @@ class UserFragment : DaggerFragment() {
         when (it.id) {
             btnSearchTitle.id -> { adapter.filter.filter(tvSearchTitle.text.toString()) }
             btnSort.id -> { sortUsers() }
-        }
-    }
-    object CustomKt {
-        inline fun <T> forThem(vararg objs: T, block: T.() -> Unit) {
-            for (obj in objs)
-                obj.block()
         }
     }
 }
