@@ -13,6 +13,7 @@ import com.example.testapplication.dataBase.User
 import com.example.testapplication.databinding.FragmentUserBinding
 import com.example.testapplication.main.ViewModelProviderFactory
 import com.example.testapplication.vo.Resource
+import com.example.testapplication.vo.Status
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.seacrh_layout.view.*
 import javax.inject.Inject
@@ -36,7 +37,7 @@ class UserFragment : DaggerFragment() {
 
         userViewModel = injectViewModel(viewModelFactory)
         userViewModel.getUsers()
-        userViewModel.users.observe(viewLifecycleOwner, observer)
+        userViewModel.userData.observe(viewLifecycleOwner, userObserver)
 
         with(binding.lSearch) {
             btnSearchTitle.setOnClickListener {
@@ -51,17 +52,29 @@ class UserFragment : DaggerFragment() {
         return ViewModelProviders.of(this, factory)[T::class.java]
     }
 
-    private val observer: Observer<Resource<List<User>>> =
-            Observer { users -> adapter.setUsers(users.data!!) }
+    private val userObserver: Observer<Resource<List<User>>> =
+            Observer {
+                when (it.status) {
+                    Status.SUCCESS -> adapter.setUsers(it.data!!)
+                    Status.ERROR -> Toast
+                            .makeText(this.context, "error 404", Toast.LENGTH_SHORT)
+                            .show()
+                    Status.LOADING -> Toast
+                            .makeText(this.context, "loading", Toast.LENGTH_SHORT)
+                            .show()
+                }
+            }
 
     private fun sortUsers() {
-        adapter.usersList = if (sortAscending)
-            adapter.usersList.sortedBy { it.username }
-        else
-            adapter.usersList.sortedByDescending { it.username }
-        sortAscending = !sortAscending
-        binding.contentUser.rvUser.adapter = adapter
-        binding.contentUser.rvUser.adapter!!.notifyDataSetChanged()
+        with(adapter) {
+            usersList = if (sortAscending)
+                usersList.sortedBy { it.username }
+            else
+                usersList.sortedByDescending { it.username }
+            sortAscending = !sortAscending
+            binding.contentUser.rvUser.adapter = this
+            binding.contentUser.rvUser.adapter!!.notifyDataSetChanged()
+        }
         Toast.makeText(this.activity, "Sort", Toast.LENGTH_SHORT).show()
     }
 }

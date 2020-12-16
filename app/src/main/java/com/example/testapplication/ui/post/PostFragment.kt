@@ -13,6 +13,7 @@ import com.example.testapplication.api.PlaceHolderPost
 import com.example.testapplication.databinding.FragmentPostBinding
 import com.example.testapplication.main.ViewModelProviderFactory
 import com.example.testapplication.vo.Resource
+import com.example.testapplication.vo.Status
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.seacrh_layout.view.*
 import javax.inject.Inject
@@ -37,8 +38,8 @@ class PostFragment : DaggerFragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         binding = FragmentPostBinding.inflate(layoutInflater, container, false)
         adapter = PostListAdapter()
@@ -46,7 +47,7 @@ class PostFragment : DaggerFragment() {
 
         postViewModel = injectViewModel(viewModelFactory)
         postViewModel.getPosts(userId)
-        postViewModel.posts.observe(viewLifecycleOwner, observer)
+        postViewModel.postData.observe(viewLifecycleOwner, postObserver)
 
         with(binding.lSearch) {
             btnSearchTitle.setOnClickListener {
@@ -62,18 +63,31 @@ class PostFragment : DaggerFragment() {
         return ViewModelProviders.of(this, factory)[T::class.java]
     }
 
-    private val observer: Observer<Resource<List<PlaceHolderPost>>> =
-        Observer {  adapter.setPosts(it.data!!) }
+    private val postObserver: Observer<Resource<List<PlaceHolderPost>>> =
+            Observer {
+                when (it.status) {
+                    Status.SUCCESS -> adapter.setPosts(it.data!!)
+                    Status.LOADING -> Toast
+                            .makeText(this.context, "loading", Toast.LENGTH_SHORT)
+                            .show()
+                    Status.ERROR -> Toast
+                            .makeText(this.context, "error 404", Toast.LENGTH_SHORT)
+                            .show()
+                }
+            }
 
     private fun sortPosts() {
-        adapter.listOfPosts = if (sortAscending)
-            adapter.listOfPosts.sortedBy { it.title }
-        else
-            adapter.listOfPosts.sortedByDescending { it.title }
-        sortAscending = !sortAscending
+        with(adapter) {
+            listOfPosts = if (sortAscending)
+                listOfPosts.sortedBy { it.title }
+            else
+                listOfPosts.sortedByDescending { it.title }
+            sortAscending = !sortAscending
 
-        binding.contentPosts.rvPost.adapter = adapter
-        binding.contentPosts.rvPost.adapter!!.notifyDataSetChanged()
+            binding.contentPosts.rvPost.adapter = this
+            binding.contentPosts.rvPost.adapter!!.notifyDataSetChanged()
+        }
         Toast.makeText(this.activity, "Sort", Toast.LENGTH_SHORT).show()
+
     }
 }
