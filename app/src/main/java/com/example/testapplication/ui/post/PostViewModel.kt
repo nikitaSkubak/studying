@@ -22,5 +22,4 @@ class PostViewModel @Inject constructor(private val repository: PostUseCase) : V
                         { listOfPosts -> postsData.value = Resource.success(listOfPosts) },
                         { postsData.value = Resource.error(it.stackTraceToString(), null) }))
     }
-
 }

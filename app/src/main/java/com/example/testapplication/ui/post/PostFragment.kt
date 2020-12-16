@@ -15,7 +15,7 @@ import com.example.testapplication.main.ViewModelProviderFactory
 import com.example.testapplication.vo.Resource
 import com.example.testapplication.vo.Status
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.seacrh_layout.view.*
+import kotlinx.android.synthetic.main.seacrh_layout.*
 import javax.inject.Inject
 
 
@@ -49,13 +49,9 @@ class PostFragment : DaggerFragment() {
         postViewModel.getPosts(userId)
         postViewModel.postsData.observe(viewLifecycleOwner, postsObserver)
 
-        with(binding.lSearch) {
-            btnSearchTitle.setOnClickListener {
-                adapter.filter.filter(tvSearchTitle.text.toString())
-            }
-            btnSort.setOnClickListener { sortPosts() }
+        CustomKt.forThem(btnSearchTitle, btnSort) {
+            setOnClickListener(clickListener)
         }
-
         return binding.root
     }
 
@@ -89,5 +85,18 @@ class PostFragment : DaggerFragment() {
         }
         Toast.makeText(this.activity, "Sort", Toast.LENGTH_SHORT).show()
 
+    }
+
+    private val clickListener = View.OnClickListener {
+        when (it.id) {
+            btnSearchTitle.id -> { adapter.filter.filter(tvSearchTitle.text.toString()) }
+            btnSort.id -> { sortPosts() }
+        }
+    }
+    object CustomKt {
+        inline fun <T> forThem(vararg objs: T, block: T.() -> Unit) {
+            for (obj in objs)
+                obj.block()
+        }
     }
 }

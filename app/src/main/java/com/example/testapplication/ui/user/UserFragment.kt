@@ -15,7 +15,7 @@ import com.example.testapplication.main.ViewModelProviderFactory
 import com.example.testapplication.vo.Resource
 import com.example.testapplication.vo.Status
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.seacrh_layout.view.*
+import kotlinx.android.synthetic.main.seacrh_layout.*
 import javax.inject.Inject
 
 class UserFragment : DaggerFragment() {
@@ -39,12 +39,10 @@ class UserFragment : DaggerFragment() {
         userViewModel.getUsers()
         userViewModel.usersData.observe(viewLifecycleOwner, usersObserver)
 
-        with(binding.lSearch) {
-            btnSearchTitle.setOnClickListener {
-                adapter.filter.filter(tvSearchTitle.text.toString())
-            }
-            btnSort.setOnClickListener { sortUsers() }
+        CustomKt.forThem(btnSearchTitle, btnSort) {
+            setOnClickListener(clickListener)
         }
+
         return binding.root
     }
 
@@ -76,5 +74,18 @@ class UserFragment : DaggerFragment() {
             binding.contentUser.rvUser.adapter!!.notifyDataSetChanged()
         }
         Toast.makeText(this.activity, "Sort", Toast.LENGTH_SHORT).show()
+    }
+
+    private val clickListener = View.OnClickListener {
+        when (it.id) {
+            btnSearchTitle.id -> { adapter.filter.filter(tvSearchTitle.text.toString()) }
+            btnSort.id -> { sortUsers() }
+        }
+    }
+    object CustomKt {
+        inline fun <T> forThem(vararg objs: T, block: T.() -> Unit) {
+            for (obj in objs)
+                obj.block()
+        }
     }
 }
