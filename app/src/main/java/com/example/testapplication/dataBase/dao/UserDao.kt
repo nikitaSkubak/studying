@@ -11,7 +11,7 @@ import io.reactivex.Single
 abstract class UserDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     @JvmSuppressWildcards
-    abstract fun insertUsers(user: List<User>): List<Long>
+    abstract fun insertUsers(user: List<User>): Single<List<Long>>
 
     @Query("select * from User")
     abstract fun getUsers(): Single<List<User>>

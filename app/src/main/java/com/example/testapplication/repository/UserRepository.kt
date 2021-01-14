@@ -16,7 +16,7 @@ interface UserRepository {
      * @return Observable that contains `id` list of successfully inserted `users`.
      * @param users List<User> to set the list of users into DataBase table `user`.
      **/
-    fun insertUsers(users: List<User>): Single<List<User>>
+    fun insertUsers(users: List<User>): Single<List<Long>>
     /**
      *Returns list of User`s from DataBase
      * @return Single that contains User list.
