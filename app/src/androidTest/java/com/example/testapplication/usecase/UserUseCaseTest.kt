@@ -23,5 +23,45 @@ import org.mockito.MockitoAnnotations
 @RunWith(AndroidJUnit4::class)
 class UserUseCaseTest {
 
+    @Rule
+    @JvmField
+    val rule = InstantTaskExecutorRule()
 
+    private val userRepo = mock(UserRepository::class.java)
+    private lateinit var useCase: UserUseCase
+
+    @Before
+    @Throws
+    fun setup() {
+        MockitoAnnotations.initMocks(this)
+        RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
+        useCase = UserUseCaseImpl(userRepo)
+    }
+
+    @Test
+    fun getUsersFromApiAndSaveThemIntoDBTestSuccess() {
+        val geo = PlaceHolderGeo(25.5f, 25.5f)
+        val address = PlaceHolderAddress("Groove", "5", "NY", "0000", geo)
+        val user0 = PlaceHolderUser(0, "NAME1", "Luke", "Skywalker", address)
+        val user1 = PlaceHolderUser(1, "NAME2", "Leia", "Organa", address)
+        val user2 = PlaceHolderUser(2, "NAME3", "Han", "Solo", address)
+
+        val anyArray = listOf(user0, user1, user2)
+        val userArray = anyArray.map { it.toUser() }
+        val response = listOf<Long>(0, 1, 2)
+
+        `when`(userRepo.getUsersFromPlaceHolderApi()).thenReturn(Single.just(anyArray))
+        `when`(userRepo.insertUsers(userArray)).thenReturn(Single.just(response))
+        `when`(userRepo.getUsersFromDB()).thenReturn(Single.just(userArray))
+
+        useCase.getUsersFromApiAndSaveThemIntoDB()
+            .test()
+            .await()
+            .assertSubscribed()
+            .assertNoErrors()
+            .assertValue { it.size == 3 }
+            .assertValue(userArray)
+            .assertComplete()
+            .dispose()
+    }
 }
