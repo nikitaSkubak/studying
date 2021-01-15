@@ -20,6 +20,6 @@ class PostViewModel @Inject constructor(private val repository: PostUseCase) : V
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { listOfPosts -> postsData.value = Resource.success(listOfPosts) },
-                        { postsData.value = Resource.error(it.stackTraceToString(), null) }))
+                        { postsData.value = Resource.error(it.stackTrace.toString(), null) }))
     }
 }

@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.testapplication.api.PlaceHolderAddress
 import com.example.testapplication.api.PlaceHolderApi
@@ -12,17 +11,12 @@ import com.example.testapplication.api.PlaceHolderGeo
 import com.example.testapplication.api.PlaceHolderUser
 import com.example.testapplication.dataBase.TwitRoomDataBase
 import com.example.testapplication.dataBase.User
-import com.example.testapplication.dataBase.dao.PostDao
 import com.example.testapplication.dataBase.dao.UserDao
-import com.example.testapplication.repository.impl.PostRepositoryImpl
 import com.example.testapplication.repository.impl.UserRepositoryImpl
 import com.example.testapplication.util.toUser
-import com.google.gson.Gson
 import io.reactivex.Single
 import io.reactivex.android.plugins.RxAndroidPlugins
-import io.reactivex.observers.TestObserver
 import io.reactivex.schedulers.Schedulers
-import org.hamcrest.CoreMatchers
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -30,10 +24,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 
 @RunWith(AndroidJUnit4::class)
 class UserRepositoryTest {

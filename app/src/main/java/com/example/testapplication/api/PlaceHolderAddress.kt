@@ -7,6 +7,6 @@ data class PlaceHolderAddress(
         val zipcode: String,
         val geo: PlaceHolderGeo
 ) {
-    override fun toString() = "$street,\n$suite,\n$city,\n$zipcode\n$geo"
+    override fun toString() = "$street\n$suite\n$city\n$zipcode\n${geo.toString()}"
 }
 

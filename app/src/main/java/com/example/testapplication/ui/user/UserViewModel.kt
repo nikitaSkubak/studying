@@ -21,7 +21,7 @@ class UserViewModel @Inject constructor(private val userUseCase: UserUseCase) : 
                                 { listOfUsers -> usersData.value = Resource.success(listOfUsers) },
                                 {
                                     usersData.value = Resource.error(
-                                            it.stackTraceToString(),
+                                            it.stackTrace.toString(),
                                             null)
                                 }))
     }

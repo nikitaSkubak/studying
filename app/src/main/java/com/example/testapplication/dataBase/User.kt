@@ -10,5 +10,5 @@ class User(
         @field:ColumnInfo(name = "name") var name: String,
         @field:ColumnInfo(name = "username") var username: String,
         @field:ColumnInfo(name = "email") var email: String,
-        @field:ColumnInfo(name = "address") var address: String,
+        @field:ColumnInfo(name = "address") var address: String
 )
