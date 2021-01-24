@@ -1,14 +1,17 @@
 package com.example.testapplication.ui.user
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import androidx.cardview.widget.CardView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testapplication.dataBase.User
 import com.example.testapplication.databinding.ItemUserBinding
 
-class UserListAdapter: RecyclerView.Adapter<UserListAdapter.UserViewHolder>(), Filterable {
+class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserViewHolder>(), Filterable {
     var usersList: List<User> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = UserViewHolder.from(parent)
@@ -16,6 +19,7 @@ class UserListAdapter: RecyclerView.Adapter<UserListAdapter.UserViewHolder>(), F
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val currentUser = usersList[position]
         holder.bindUser(currentUser)
+        holder.binding.mcvCard.setOnClickListener(userClickListener)
     }
 
     override fun getItemCount(): Int = usersList.size
@@ -25,8 +29,21 @@ class UserListAdapter: RecyclerView.Adapter<UserListAdapter.UserViewHolder>(), F
         notifyDataSetChanged()
     }
 
+    private val userClickListener = View.OnClickListener {
+        it
+            .findNavController()
+            .navigate(
+                UserFragmentDirections
+                    .actionUserFragmentToPostFragment(
+                        Integer.parseInt(
+                                (it as CardView).contentDescription.toString()
+                        )
+                    )
+            )
+    }
+
     class UserViewHolder private constructor(var binding: ItemUserBinding) :
-            RecyclerView.ViewHolder(binding.root) {
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bindUser(user: User) {
             binding.user = user
@@ -48,12 +65,13 @@ class UserListAdapter: RecyclerView.Adapter<UserListAdapter.UserViewHolder>(), F
             val results = FilterResults()
 
             val filteredList = listOfUsers.filter { user ->
-               user.username == filterString
+                user.username == filterString
             }
             results.values = filteredList
             results.count = filteredList.size
             return results
         }
+
         @SuppressWarnings("unchecked")
         override fun publishResults(constraint: CharSequence, results: FilterResults) {
             usersList = results.values as List<User>

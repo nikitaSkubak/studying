@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.card.MaterialCardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -36,6 +36,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/lSearch"
                 app:layout_constraintVertical_bias="0.557"
                 tools:layout_editor_absoluteX="0dp" />
-        </com.google.android.material.card.MaterialCardView>
+        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

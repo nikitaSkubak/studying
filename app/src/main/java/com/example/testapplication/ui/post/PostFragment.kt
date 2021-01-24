@@ -27,7 +27,7 @@ class PostFragment : DaggerFragment() {
     lateinit var viewModelFactory: ViewModelProviderFactory
     private lateinit var postViewModel: PostViewModel
     private lateinit var adapter: PostListAdapter
-    private var userId: Int = 0
+    private var userId: Int = 1
     lateinit var binding: FragmentPostBinding
     private var sortAscending = true
 

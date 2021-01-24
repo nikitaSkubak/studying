@@ -16,6 +16,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
@@ -51,7 +52,7 @@ class UserUseCaseTest {
         val User2 = User(2, "NAME3", "Han", "Solo", "NY")
 
         val anyArray = listOf(user0, user1, user2)
-        val userArray = anyArray.map { it.toUser() }
+        val userArray = listOf(User0, User1, User2)
         val response = listOf<Long>(0, 1, 2)
 
         `when`(userRepo.getUsersFromPlaceHolderApi()).thenReturn(Single.just(anyArray))

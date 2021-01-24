@@ -9,12 +9,11 @@
     </data>
 
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/mcvCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:onClick="openPostsOfUser"
         app:cardCornerRadius="20dp"
         app:cardElevation="8dp"
         android:contentDescription="@{String.valueOf(user.id)}"
@@ -26,7 +25,7 @@
             android:padding="15dp"
             android:layout_height="wrap_content">
 
-            <com.google.android.material.textview.MaterialTextView
+            <TextView
                 android:id="@+id/tvUsername"
                 style="@style/TextView"
                 android:layout_width="wrap_content"
@@ -39,7 +38,7 @@
                 app:layout_constraintStart_toEndOf="@+id/tvTextUsername"
                 app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
-            <com.google.android.material.textview.MaterialTextView
+            <TextView
                 android:id="@+id/tvEmail"
                 style="@style/TextView"
                 android:layout_width="wrap_content"
@@ -51,7 +50,7 @@
                 app:layout_constraintStart_toStartOf="@+id/tvUsername"
                 app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
 
-            <com.google.android.material.textview.MaterialTextView
+            <TextView
                 android:id="@+id/tvAddress"
                 style="@style/TextView"
                 android:layout_width="wrap_content"
@@ -63,7 +62,7 @@
                 app:layout_constraintStart_toStartOf="@+id/tvEmail"
                 app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
 
-            <com.google.android.material.textview.MaterialTextView
+            <TextView
                 android:id="@+id/tvName"
                 style="@style/TextView"
                 android:layout_width="wrap_content"
@@ -75,7 +74,7 @@
                 app:layout_constraintStart_toStartOf="@+id/tvUsername"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.textview.MaterialTextView
+            <TextView
                 android:id="@+id/tvTextAddress"
                 style="@style/TextView"
                 android:layout_width="wrap_content"
@@ -87,7 +86,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvTextEmail" />
 
-            <com.google.android.material.textview.MaterialTextView
+            <TextView
                 android:id="@+id/tvTextName"
                 style="@style/TextView"
                 android:layout_width="wrap_content"
@@ -99,7 +98,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.textview.MaterialTextView
+            <TextView
                 android:id="@+id/tvTextUsername"
                 style="@style/TextView"
                 android:layout_width="wrap_content"
@@ -111,7 +110,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvTextName" />
 
-            <com.google.android.material.textview.MaterialTextView
+            <TextView
                 android:id="@+id/tvTextEmail"
                 style="@style/TextView"
                 android:layout_width="wrap_content"
@@ -124,5 +123,5 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvTextUsername" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 </layout>

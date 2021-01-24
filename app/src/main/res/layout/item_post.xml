@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
 
-        <com.google.android.material.card.MaterialCardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
@@ -27,18 +27,17 @@
                 android:layout_height="wrap_content"
                 android:padding="14dp">
 
-                <com.google.android.material.textview.MaterialTextView
+                <TextView
                     android:id="@+id/tv_comments"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
-                    android:hint="count of comments"
                     android:text="@{String.valueOf(post.comments.size())}"
                     android:textAlignment="textEnd"
                     app:layout_constraintEnd_toStartOf="@+id/tvCommentsCount"
                     app:layout_constraintTop_toTopOf="@+id/tvCommentsCount" />
 
-                <com.google.android.material.textview.MaterialTextView
+                <TextView
                     android:id="@+id/tvCommentsCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -47,7 +46,7 @@
                     app:layout_constraintEnd_toEndOf="@+id/tvBody"
                     app:layout_constraintTop_toBottomOf="@+id/tvBody" />
 
-                <com.google.android.material.textview.MaterialTextView
+                <TextView
                     android:id="@+id/tvTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -63,7 +62,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.textview.MaterialTextView
+                <TextView
                     android:id="@+id/tvBody"
                     style="@style/TextView"
                     android:layout_width="match_parent"
@@ -91,6 +90,6 @@
                         tools:listitem="@layout/item_comment" />
                 </ScrollView>
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.card.MaterialCardView>
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 </layout>
